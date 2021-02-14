@@ -14,6 +14,10 @@
     integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
 </head>
+<!-- Bonus section
+  1. toggle spinner added
+  2. 
+ -->
 
 <body>
   <div class="container">
@@ -24,7 +28,13 @@
       </div>
       <button type="button" id="search-btn" class="btn btn-primary mb-2">Search</button>
     </div>
-    <section class="images">
+    <!-- spinner -->
+    <div class="d-flex justify-content-center ">
+      <div id="loading-spinner" class="spinner-border text-danger d-none" role="status">
+
+      </div>
+    </div>
+    <section id="images" class="images">
       <div class="justify-content-around align-items-center mt-3 gallery-header mb-2">
         <h3 class="head-title text-center">Select image for create slider</h3>
         <div class="input-group col-md-3 mb-2 mb-md-0">

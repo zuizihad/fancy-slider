@@ -11,9 +11,8 @@ let sliders = [];
 // If this key doesn't work
 // Find the name in the url and go to their website
 // to create your own api key
-// const KEY = '20268062-48ca609435db56a215f7a6542';
 const KEY = '15674931-a9d714b6e9d654524df198e00&q';
-// 20268062-48ca609435db56a215f7a6542
+
 // show images 
 const showImages = (images) => {
   imagesArea.style.display = 'block';
@@ -26,7 +25,7 @@ const showImages = (images) => {
     div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
     gallery.appendChild(div)
   })
-
+  toggleSpinner();
 }
 
 document.getElementById('search').addEventListener('keypress', function (event) {
@@ -36,6 +35,7 @@ document.getElementById('search').addEventListener('keypress', function (event) 
 })
 
 const getImages = (query) => {
+  toggleSpinner();
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
     .then(data => showImages(data.hits))
@@ -134,3 +134,10 @@ searchBtn.addEventListener('click', function () {
 sliderBtn.addEventListener('click', function () {
   createSlider()
 })
+
+const toggleSpinner = () => {
+  const spinner = document.getElementById('loading-spinner');
+  const images = document.getElementById('images');
+  spinner.classList.toggle('d-none');
+  images.classList.toggle('d-none');
+}
