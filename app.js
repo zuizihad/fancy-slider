@@ -55,7 +55,7 @@ const selectItem = (event, img) => {
   }
 }
 var timer
-const createSlider = () => {
+const createSlider = (duration) => {
   // check slider image length
   if (sliders.length < 2) {
     alert('Select at least 2 image.')
@@ -74,27 +74,21 @@ const createSlider = () => {
   document.querySelector('.main').style.display = 'block';
   // hide image aria
   imagesArea.style.display = 'none';
-  const duration = document.getElementById('duration').value || 1000;
 
-
-  if (duration < 1000) {
-    alert('Minimum Duration 1000 ms.')
-    return;
-  } else {
-    sliders.forEach(slide => {
-      let item = document.createElement('div')
-      item.className = "slider-item";
-      item.innerHTML = `<img class="w-100"
+  sliders.forEach(slide => {
+    let item = document.createElement('div')
+    item.className = "slider-item";
+    item.innerHTML = `<img class="w-100"
     src="${slide}"
     alt="">`;
-      sliderContainer.appendChild(item)
-    })
-    changeSlide(0)
-    timer = setInterval(function () {
-      slideIndex++;
-      changeSlide(slideIndex);
-    }, duration);
-  }
+    sliderContainer.appendChild(item)
+  })
+  changeSlide(0)
+  timer = setInterval(function () {
+    slideIndex++;
+    changeSlide(slideIndex);
+  }, duration);
+
 }
 
 // change slider index 
@@ -132,7 +126,13 @@ searchBtn.addEventListener('click', function () {
 })
 
 sliderBtn.addEventListener('click', function () {
-  createSlider()
+  const duration = document.getElementById('duration').value || 1000;
+
+  if (duration > 0) {
+    createSlider(duration)
+  } else {
+    alert('cannot create slider, duration cannot be nagetive');
+  }
 })
 
 const toggleSpinner = () => {
